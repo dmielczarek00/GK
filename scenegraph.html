@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rotating Figures</title>
+        <style>
+            canvas { display: block; border: 2px solid #333; }
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="1200" height="800"></canvas>
+        <script>
+            let canvas = document.getElementById('myCanvas');
+            let ctx = canvas.getContext('2d');
+
+            class Polygon {
+                constructor(x, y, radius) {
+                    this.x = x;
+                    this.y = y;
+                    this.radius = radius;
+                }
+
+                draw(ctx, angle) {
+                    ctx.beginPath();
+                    const step = (2 * Math.PI) / 7;
+                    const startX = this.x + this.radius * Math.cos(angle);
+                    const startY = this.y + this.radius * Math.sin(angle);
+                    ctx.moveTo(startX, startY);
+
+                    for (let i = 0; i < 7; i++) {
+                        angle += step;
+                        const x = this.x + this.radius * Math.cos(angle);
+                        const y = this.y + this.radius * Math.sin(angle);
+                        ctx.lineTo(x, y);
+                        ctx.moveTo(this.x, this.y);
+                        ctx.lineTo(x, y);
+                    }
+
+                    ctx.closePath();
+                    ctx.strokeStyle = "#000";
+                    ctx.stroke();
+                }
+
+            }
+
+            class MultiShape {
+                constructor(ctx, shapes) {
+                    this.ctx = ctx;
+                    this.shapes = shapes;
+                    this.angle = 0;
+                }
+
+                animate() {
+                    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    this.angle += Math.PI / 180;
+                    this.shapes.forEach(shape => shape.draw(this.ctx, this.angle));
+                    requestAnimationFrame(() => this.animate());
+                }
+            }
+
+            class Triangle {
+                constructor(x, y, size, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.size = size;
+                    this.color = color;
+                }
+
+                draw(ctx) {
+                    let x1 = this.x - this.size / 2;
+                    let y1 = this.y + this.size / Math.sqrt(3);
+
+                    let x2 = this.x + this.size / 2;
+                    let y2 = this.y + this.size / Math.sqrt(3);
+
+                    let x3 = this.x;
+                    let y3 = this.y - (2 * this.size) / Math.sqrt(3);
+
+                    ctx.fillStyle = this.color;
+
+                    ctx.beginPath();
+                    ctx.moveTo(x1, y1);
+
+                    ctx.lineTo(x2, y2);
+
+                    ctx.lineTo(x3, y3);
+                    
+                    ctx.closePath();
+                    ctx.fill();
+                }
+            }
+
+            class RotatedRectangle {
+                constructor(centerX, centerY, width, height, rotationAngle, color) {
+                    this.centerX = centerX;
+                    this.centerY = centerY;
+
+                    this.width = width;
+                    this.height = height;
+                    
+                    this.rotationAngle = rotationAngle;
+                    this.color = color;
+                }
+
+                draw(ctx) {
+                    ctx.save();
+                    ctx.translate(this.centerX, this.centerY);
+                    ctx.rotate(this.rotationAngle * Math.PI / 180);
+                    ctx.fillStyle = this.color;
+                    ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
+                    ctx.restore();
+                }
+            }
+
+            let shapes = [
+                new Polygon(60, 140, 50),
+                new Polygon(275, 180, 50),
+                new RotatedRectangle(167, 160, 240, 15, 10, "red"),
+                new Triangle(160, 240, 75, "purple"),
+
+                new Polygon(870, 120, 40),
+                new Polygon(1060, 155, 40),
+                new RotatedRectangle(967, 140, 200, 15, 10, "red"),
+                new Triangle(960, 205, 60, "green"),
+
+                new Polygon(400, 485, 80),
+                new Polygon(730, 545, 80),
+                new RotatedRectangle(567, 515, 350, 20, 10, "red"),
+                new Triangle(560, 630, 100, "blue")
+            ];
+
+            let animation = new MultiShape(ctx, shapes);
+            animation.animate();
+        </script>
+    </body>
+</html>
