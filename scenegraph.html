@@ -9,9 +9,9 @@
         </style>
     </head>
     <body>
-        <canvas id="myCanvas" width="1200" height="800"></canvas>
+        <canvas id="Canvas" width="1200" height="800"></canvas>
         <script>
-            let canvas = document.getElementById('myCanvas');
+            let canvas = document.getElementById('Canvas');
             let ctx = canvas.getContext('2d');
 
             class Polygon {
@@ -114,21 +114,23 @@
             }
 
             let shapes = [
-                new Polygon(60, 140, 50),
-                new Polygon(275, 180, 50),
-                new RotatedRectangle(167, 160, 240, 15, 10, "red"),
-                new Triangle(160, 240, 75, "purple"),
+                new Polygon(95, 102, 70),
+                new Polygon(402, 155, 70),
+                new RotatedRectangle(250, 130, 320, 20, 10, "red"),
+                new Triangle(240, 245, 100, "purple"),
 
-                new Polygon(870, 120, 40),
-                new Polygon(1060, 155, 40),
-                new RotatedRectangle(967, 140, 200, 15, 10, "red"),
-                new Triangle(960, 205, 60, "green"),
+                new Polygon(735, 90, 52.5),
+                new Polygon(965, 130, 52.5),
+                new RotatedRectangle(850, 110, 240, 15, 10, "red"),
+                new Triangle(840, 200, 75, "green"),
 
-                new Polygon(400, 485, 80),
-                new Polygon(730, 545, 80),
-                new RotatedRectangle(567, 515, 350, 20, 10, "red"),
-                new Triangle(560, 630, 100, "blue")
+                new Polygon(350, 460, 105),
+                new Polygon(810, 540, 105),
+                new RotatedRectangle(580, 500, 480, 30, 10, "red"),
+                new Triangle(580, 680, 150, "blue")
             ];
+
+
 
             let animation = new MultiShape(ctx, shapes);
             animation.animate();
