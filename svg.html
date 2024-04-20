@@ -1,0 +1,39 @@
+<svg width="1200px" height="800px" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid">
+    <defs>
+        <g id="shape" stroke-width="0.15" stroke="black" fill="white">
+            <polygon points="20 10 16.23 17.82 7.77 19.75 0.99 14.34 0.99 5.66 7.77 0.25 16.23 3.18"/>
+            <line x1="20" y1="10" x2="10" y2="10"/>
+            <line x1="16.23" y1="17.82" x2="10" y2="10"/>
+            <line x1="7.77" y1="19.75" x2="10" y2="10"/>
+            <line x1="0.99" y1="14.34" x2="10" y2="10"/>
+            <line x1="0.99" y1="5.66" x2="10" y2="10"/>
+            <line x1="7.77" y1="0.25" x2="10" y2="10"/>
+            <line x1="16.23" y1="3.18" x2="10" y2="10"/>
+
+            <animateTransform attributeName="transform" type="rotate" from="0 10 10" to="360 10 10" dur="3.5s" repeatCount="indefinite"/>
+        </g>
+
+        <g id="triangle">
+            <polygon points="20,30 23,5.5 27.5,30"/>
+        </g>
+        
+        <g id="rectangle" stroke-width="3.75" stroke="red">
+            <line x1="9" y1="9.5" x2="56" y2="19.5"/>
+        </g>
+    </defs>
+
+    <use xlink:href="#shape" transform="scale(3.5,3.5) translate(30,35)"/>
+    <use xlink:href="#shape" transform="scale(3.5,3.5) translate(75,44)"/>
+    <use xlink:href="#rectangle" transform="scale(3.5,3.5) translate(30,35)"/>
+    <use xlink:href="#triangle" fill="blue" transform="scale(3.5,3.5) translate(38,44)"/>
+
+    <use xlink:href="#shape" transform="scale(3,3) translate(-5,5)"/>
+    <use xlink:href="#shape" transform="scale(3,3) translate(40,14)"/>
+    <use xlink:href="#rectangle" transform="scale(3,3) translate(-5,5)"/>
+    <use xlink:href="#triangle" fill="purple" transform="scale(3,3) translate(3,14)"/>
+
+    <use xlink:href="#shape" transform="scale(2,2) translate(105,5)"/>
+    <use xlink:href="#shape" transform="scale(2,2) translate(150,14)"/>
+    <use xlink:href="#rectangle" transform="scale(2,2) translate(105,5)"/>
+    <use xlink:href="#triangle" fill="green" transform="scale(2,2) translate(113,14)"/>
+</svg>
