@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
-<title>CS 424 Lab 9</title>
+<title>Lab 8</title>
 <script src="https://cdn.jsdelivr.net/npm/three@0.115/build/three.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.115/examples/js/controls/OrbitControls.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.115/examples/js/loaders/GLTFLoader.js"></script>
@@ -31,7 +31,7 @@ function render() {
     renderer.render(scene, camera);
 }
 
-function createCylinderMesh(radiusTop, radiusBottom, height, radialSegments, color, specular, shininess) {
+function createRoof(radiusTop, radiusBottom, height, radialSegments, color, specular, shininess) {
     return new THREE.Mesh(
         new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, 1),
         new THREE.MeshPhongMaterial({
@@ -71,7 +71,7 @@ function createWorld() {
     scene.add(camera);
     
     //------------------- Create the scene's visible objects ----------------------
-	floor = createCylinderMesh(13.5, 13.5, 0.6, 14, 0x441c84, 0x222222, 16);
+	floor = createRoof(13.5, 13.5, 0.6, 7, 0x441c84, 0x222222, 16);
     floor.rotation.y = Math.PI/12;
     scene.add(floor);
 	
@@ -91,18 +91,18 @@ function createWorld() {
     ];
 
     for (let i = 0; i < polePositions.length; i++) {
-        let pole = createCylinderMesh(0.3, 0.3, 7.5, 30, 0x7c5426, 0x222222, 8);
+        let pole = createRoof(0.3, 0.3, 7.5, 30, 0x7c5426, 0x222222, 8);
         pole.position.set(polePositions[i].x, polePositions[i].y, polePositions[i].z);
         pole.rotation.y = Math.PI / 12;
         scene.add(pole);
         poles.push(pole);
     }
 	
-	roof = createCylinderMesh(0.1, 12, 3, 30, 0x441c84, 0x222222, 8);
+	roof = createRoof(0.1, 12, 3, 30, 0x441c84, 0x222222, 8);
     roof.position.y = 9.1;
     scene.add(roof);
 		 
-	roof2 = createCylinderMesh(12, 12, 0.3, 200, 0x441c84, 0x222222, 8);
+	roof2 = createRoof(12, 12, 0.3, 200, 0x441c84, 0x222222, 8);
     roof2.position.y = 7.5;
     scene.add(roof2);
 	
